@@ -1,7 +1,19 @@
-class pet
-    attr_accessor :id, :category, 
+class ModelPet
+  attr_accessor :id,
+                :category,
+                :name,
+                :photoUrls,
+                :tags,
+                :status
 end
 
+# class Pet_category
+#     attr_accessor :id, :name
+# end
+
+# class Pet_tags
+#     attr_accessor :id, :name
+# end
 
 # {
 #     "id": 0,

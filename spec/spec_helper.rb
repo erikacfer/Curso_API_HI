@@ -1,10 +1,19 @@
-require "dotenv"
-require "hi_httparty"
+require 'dotenv'
+require 'hi_httparty'
+require 'faker'
+require 'factory_bot'
+require 'httparty'
 
+# Configuração da gem da Hi Platform
 include HiHttparty::RequestsType
 HiHttparty.configure do |config_hihttparty|
   config_hihttparty.timeout_value = 10
 end
+
+# Configuração da gem Factory_bot
+include FactoryBot::Syntax::Methods
+FactoryBot.definition_file_paths = %w(./spec/supports/factories)
+FactoryBot.find_definitions
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -16,6 +25,5 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
 
-# A configuração abaixo carrega o arquivo padrão na hora de executar os testes. Para rodar as configurações
-#  de outro ambiente, olhe o tópico "RODANDO O PROJETO EM OUTROS AMBIENTES"
-Dotenv.load(".env.qa")
+# Carrega o arquivo de configuração
+Dotenv.load('.env.pet')
