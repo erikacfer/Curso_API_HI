@@ -23,10 +23,12 @@ class Pet
       "status": 'available',
     }
 
-    # response = HTTParty.post('https://petstore.swagger.io/v2/pet', :headers => { 'accept': 'application/json', 'content-type': 'application/json' }, :body => body.to_json)
+    #body = attributes_for(:fact_pet)
+    response = HTTParty.post('https://petstore.swagger.io/v2/pet', :headers => { 'accept': 'application/json', 'content-type': 'application/json' }, :body => body.to_json)
 
-    uri = "#{@@uri}"
-    response = without_authentication('post', uri, body.to_json, 'application/json')
+    # uri = "#{@@uri}"
+    # response = without_authentication('post', uri, body, 'application/json')
+    # puts response
   end
 
   def update_pet(body)

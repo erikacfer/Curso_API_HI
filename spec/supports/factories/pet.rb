@@ -3,23 +3,21 @@ require_relative '../models/pet.rb'
 FactoryBot.define do
   factory :fact_pet, class: ModelPet do
     id { SecureRandom.hex(3) }
-    category { '' }
+    category { attributes_for(:pet_category) }
     name { "#{Faker::Creature::Dog.name}" }
     photoUrls { '' }
-    tags { '' }
+    tags { [attributes_for(:pet_tags)] }
     status { 'available' }
+  end
 
-    # trait :category do
-    #   id { 0 }
-    #   name { "#{Faker::Creature::Dog.breed}" }
-    # end
+  factory :pet_category, class: ModelPetCategory do
+    id { 0 }
+    name { "#{Faker::Creature::Dog.breed}" }
+  end
 
-    # trait :tags do
-    #   id { 0 }
-    #   name { "#{Faker::Verb.base}" }
-    # end
-
-    # factory :pet_complete, traits: [:category, :tags]
+  factory :pet_tags, class: ModelPetTags do
+    id { 0 }
+    name { "#{Faker::Verb.base}" }
   end
 end
 

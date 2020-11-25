@@ -1,5 +1,6 @@
 require_relative '../app/pet.rb'
 require 'httparty'
+#require_relative '../spec/supports/factories/pet.rb'
 
 describe 'crud - pet' do
   subject(:pet) { Pet.new }
@@ -14,6 +15,8 @@ describe 'crud - pet' do
     end
 
     it 'create pet unsuccessfully - missing id' do
+      # obj = attributes_for(:fact_pet)
+      # puts obj.to_json
     end
 
     it 'create pet unsuccessfully - missing name' do

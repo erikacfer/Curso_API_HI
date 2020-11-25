@@ -7,13 +7,13 @@ class ModelPet
                 :status
 end
 
-# class Pet_category
-#     attr_accessor :id, :name
-# end
+class ModelPetCategory
+  attr_accessor :id, :name
+end
 
-# class Pet_tags
-#     attr_accessor :id, :name
-# end
+class ModelPetTags
+  attr_accessor :id, :name
+end
 
 # {
 #     "id": 0,
