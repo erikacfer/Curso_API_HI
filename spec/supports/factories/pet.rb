@@ -2,10 +2,10 @@ require_relative '../models/pet.rb'
 
 FactoryBot.define do
   factory :fact_pet, class: ModelPet do
-    id { SecureRandom.hex(3) }
+    id { rand(1.1000) }
     category { attributes_for(:pet_category) }
     name { "#{Faker::Creature::Dog.name}" }
-    photoUrls { '' }
+    photoUrls { ['teste'] }
     tags { attributes_for_list(:pet_tags, 1) }
     status { 'available' }
   end
