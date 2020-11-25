@@ -3,31 +3,30 @@ require 'httparty'
 class Pet
   @@uri = "#{ENV['BASE_URI']}/pet"
 
-  def create_pet
-    body = {
-      "id": 1111,
-      "category": {
-        "id": 0,
-        "name": 'string',
-      },
-      "name": 'doggie',
-      "photoUrls": [
-        'string',
-      ],
-      "tags": [
-        {
-          "id": 0,
-          "name": 'string',
-        },
-      ],
-      "status": 'available',
-    }
+  def create_pet(body)
+    # body = {
+    #   "id": 1111,
+    #   "category": {
+    #     "id": 0,
+    #     "name": 'string',
+    #   },
+    #   "name": 'doggie',
+    #   "photoUrls": [
+    #     'string',
+    #   ],
+    #   "tags": [
+    #     {
+    #       "id": 0,
+    #       "name": 'string',
+    #     },
+    #   ],
+    #   "status": 'available',
+    # }
 
-    #body = attributes_for(:fact_pet)
-    response = HTTParty.post('https://petstore.swagger.io/v2/pet', :headers => { 'accept': 'application/json', 'content-type': 'application/json' }, :body => body.to_json)
+    #response = HTTParty.post('https://petstore.swagger.io/v2/pet', :headers => { 'accept': 'application/json', 'content-type': 'application/json' }, :body => body.to_json)
 
-    # uri = "#{@@uri}"
-    # response = without_authentication('post', uri, body, 'application/json')
+    uri = "#{@@uri}"
+    response = without_authentication('post', uri, body.to_json)
     # puts response
   end
 

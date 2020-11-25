@@ -4,6 +4,9 @@ require 'faker'
 require 'factory_bot'
 require 'httparty'
 
+# Carrega o arquivo de configuração
+Dotenv.load('.env.pet')
+
 # Configuração da gem da Hi Platform
 include HiHttparty::RequestsType
 HiHttparty.configure do |config_hihttparty|
@@ -24,6 +27,3 @@ RSpec.configure do |config|
   end
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
-
-# Carrega o arquivo de configuração
-Dotenv.load('.env.pet')

@@ -6,7 +6,7 @@ FactoryBot.define do
     category { attributes_for(:pet_category) }
     name { "#{Faker::Creature::Dog.name}" }
     photoUrls { '' }
-    tags { [attributes_for(:pet_tags)] }
+    tags { attributes_for_list(:pet_tags, 1) }
     status { 'available' }
   end
 

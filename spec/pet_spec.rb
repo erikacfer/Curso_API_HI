@@ -4,19 +4,18 @@ require 'httparty'
 
 describe 'crud - pet' do
   subject(:pet) { Pet.new }
+  let(:obj_pets) { attributes_for(:fact_pet) }
 
   context 'create pet' do
     it 'create pet successfully' do
 
       #body = attributes_for(:fact_pet).to_json
       #puts body[:name]
-      resultado = pet.create_pet
+      resultado = pet.create_pet(obj_pets)
       expect(resultado.code).to eq 200
     end
 
     it 'create pet unsuccessfully - missing id' do
-      # obj = attributes_for(:fact_pet)
-      # puts obj.to_json
     end
 
     it 'create pet unsuccessfully - missing name' do
