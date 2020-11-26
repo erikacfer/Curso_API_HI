@@ -8,6 +8,17 @@ FactoryBot.define do
     photoUrls { [''] }
     tags { attributes_for_list(:pet_tags, 1) }
     status { 'available' }
+
+    trait :status_pending do
+      status { 'pending' }
+    end
+
+    trait :status_sold do
+      status { 'sold' }
+    end
+
+    factory :fact_pet_pending, traits: [:status_pending]
+    factory :fact_pet_sold, traits: [:status_sold]
   end
 
   factory :pet_category, class: ModelPetCategory do

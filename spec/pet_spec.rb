@@ -3,6 +3,8 @@ require_relative '../app/pet.rb'
 describe 'crud - pet' do
   subject(:pet) { Pet.new }
   let(:obj_pets) { attributes_for(:fact_pet) }
+  let(:obj_pets_pending) { attributes_for(:fact_pet_pending) }
+  let(:obj_pets_sold) { attributes_for(:fact_pet_sold) }
 
   context 'create pet' do
     it 'create pet successfully' do
@@ -64,9 +66,37 @@ describe 'crud - pet' do
   end
 
   context 'find pet by status' do
-    it 'find pet successfully' do
-      resultado = pet.create_pet(obj_pets)
-      expect(resultado.code).to eq 200
+    it 'find pet successfully - available' do
+      new_pet = pet.create_pet(obj_pets)
+      pet_status = new_pet['status']
+
+      resultado = pet.find_pet_status(pet_status)
+
+      expect(resultado.code).to eq(200)
+      status = resultado.all? { |value| value['status'] == 'available' }
+      expect(status).to be_truthy
+    end
+
+    it 'find pet successfully - pending' do
+      new_pet = pet.create_pet(obj_pets_pending)
+      pet_status = new_pet['status']
+
+      resultado = pet.find_pet_status(pet_status)
+
+      expect(resultado.code).to eq(200)
+      status = resultado.all? { |value| value['status'] == 'pending' }
+      expect(status).to be_truthy
+    end
+
+    it 'find pet successfully - sold' do
+      new_pet = pet.create_pet(obj_pets_sold)
+      pet_status = new_pet['status']
+
+      resultado = pet.find_pet_status(pet_status)
+
+      expect(resultado.code).to eq(200)
+      status = resultado.all? { |value| value['status'] == 'sold' }
+      expect(status).to be_truthy
     end
 
     it 'find pet unsuccessfully - missing status' do

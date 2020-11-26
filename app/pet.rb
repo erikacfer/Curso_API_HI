@@ -14,14 +14,14 @@ class Pet
     response = without_authentication('put', uri, body.to_json)
   end
 
-  def find_pet_status(body)
-    uri = "#{@@uri}/findByStatus?status="
-    response = without_authentication('get', uri, body.to_json)
+  def find_pet_status(pet_status)
+    uri = "#{@@uri}/findByStatus?status=#{pet_status}"
+    response = without_authentication('get', uri)
   end
 
-  def find_pet_id(body)
+  def find_pet_id(id)
     uri = "#{@@uri}/"
-    response = without_authentication('get', uri, body.to_json)
+    response = without_authentication('get', uri)
   end
 
   def update_pet_data(body)
