@@ -19,18 +19,18 @@ class Pet
     response = without_authentication('get', uri)
   end
 
-  def find_pet_id(id)
-    uri = "#{@@uri}/"
+  def find_pet_id(pet_id)
+    uri = "#{@@uri}/#{pet_id}"
     response = without_authentication('get', uri)
   end
 
-  def update_pet_data(body)
-    uri = "#{@@uri}/"
-    response = without_authentication('post', uri, body.to_json)
+  def update_pet_data(pet_id)
+    uri = "#{@@uri}/#{pet_id}"
+    response = without_authentication('post', uri)
   end
 
-  def delete_pet(body)
-    uri = "#{@@uri}/"
-    response = without_authentication('delete', uri, body.to_json)
+  def delete_pet(pet_id)
+    uri = "#{@@uri}/#{pet_id}"
+    response = without_authentication('delete', uri)
   end
 end
