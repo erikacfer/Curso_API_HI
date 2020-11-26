@@ -3,7 +3,7 @@
 class Pet
   @@uri = "#{ENV['BASE_URI']}/pet"
 
-  def create_pet(body)
+  def create_pet(body = nil)
     uri = "#{@@uri}"
     response = without_authentication('post', uri, body.to_json)
     # puts response
@@ -26,7 +26,7 @@ class Pet
 
   def update_pet_data(pet_id)
     uri = "#{@@uri}/#{pet_id}"
-    response = without_authentication('post', uri)
+    response = without_authentication('post', uri, body.to_json)
   end
 
   def delete_pet(pet_id)
