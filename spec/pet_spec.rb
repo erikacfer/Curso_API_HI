@@ -51,7 +51,21 @@ describe 'crud - pet' do
       expect(resultado['status']).to eq(obj_pets[:status])
     end
 
-    xit 'upate pet unsuccessfully - Invalid ID supplied' do
+    it 'upate pet unsuccessfully - Invalid ID supplied' do # teste falhou por causa da gem hi_httparty
+      new_pet = pet.create_pet(obj_pets)
+
+      obj_pets[:id] = 'invalid'
+      obj_pets[:category][:id] = rand(1..100)
+      obj_pets[:category][:name] = "#{Faker::Creature::Dog.breed}"
+      obj_pets[:name] = "#{Faker::Creature::Dog.name}"
+      obj_pets[:photoUrls] = ['https://pets/catioro']
+      obj_pets[:tags][0][:id] = rand(1..100)
+      obj_pets[:tags][0][:name] = "#{Faker::Verb.base}"
+      obj_pets[:status] = 'sold'
+
+      resultado = pet.update_pet(obj_pets)
+
+      expect(resultado.code).to eq(400)
     end
 
     xit 'upate pet unsuccessfully - Pet not found' do
