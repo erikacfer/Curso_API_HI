@@ -29,8 +29,8 @@ describe 'crud - pet' do
   context 'upate pet' do
     it 'upate pet successfully' do
       new_pet = pet.create_pet(obj_pets)
-      obj_pets[:id] = new_pet['id']
 
+      obj_pets[:id] = new_pet['id']
       obj_pets[:category][:id] = rand(1..100)
       obj_pets[:category][:name] = "#{Faker::Creature::Dog.breed}"
       obj_pets[:name] = "#{Faker::Creature::Dog.name}"
@@ -122,13 +122,23 @@ describe 'crud - pet' do
   end
 
   context 'upate pet with form data' do
-    xit 'upate pet successfully' do
+    it 'upate pet successfully' do
+      obj_pets_form = "name:#{Faker::Creature::Dog.name} status:sold"
+      puts obj_pets_form
       new_pet = pet.create_pet(obj_pets)
       pet_id = new_pet['id']
 
-      resultado = pet.update_pet_id(pet_id)
+      resultado = pet.update_pet_form(obj_pets_form, pet_id)
+      puts resultado
 
-      # descobrir como passar um body do tipo form
+      expect(resultado.code).to eq(200)
+      expect(resultado['category']['id']).to eq(obj_pets[:category][:id])
+      expect(resultado['category']['name']).to eq(obj_pets[:category][:name])
+      expect(resultado['name']).to eq(obj_pets_form[:name])
+      expect(resultado['photoUrls']).to eq(obj_pets[:photoUrls])
+      expect(resultado['tags'][0]['id']).to eq(obj_pets[:tags][0][:id])
+      expect(resultado['tags'][0]['name']).to eq(obj_pets[:tags][0][:name])
+      expect(resultado['status']).to eq(obj_pets_form[:status])
     end
 
     xit 'upate pet unsuccessfully - Invalid input' do

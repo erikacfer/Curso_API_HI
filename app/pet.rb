@@ -24,7 +24,7 @@ class Pet
     response = without_authentication('get', uri)
   end
 
-  def update_pet_data(pet_id)
+  def update_pet_form(body, pet_id)
     uri = "#{@@uri}/#{pet_id}"
     response = without_authentication('post', uri, body.to_json)
   end
