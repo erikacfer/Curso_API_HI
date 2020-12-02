@@ -6,7 +6,6 @@ class Pet
   def create_pet(body = nil)
     uri = "#{@@uri}"
     response = without_authentication('post', uri, body.to_json)
-    # puts response
   end
 
   def update_pet(body)
@@ -24,9 +23,9 @@ class Pet
     response = without_authentication('get', uri)
   end
 
-  def update_pet_form(body, pet_id)
-    uri = "#{@@uri}/#{pet_id}"
-    response = without_authentication('post', uri, body.to_json)
+  def update_pet_form(pet_id, new_name, new_status)
+    uri = "#{@@uri}/#{pet_id}?name=#{new_name}&status=#{new_status}"
+    response = without_authentication('post', uri, nil, 'application/x-www-form-urlencoded')
   end
 
   def delete_pet(pet_id)

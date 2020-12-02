@@ -137,22 +137,19 @@ describe 'crud - pet' do
 
   context 'upate pet with form data' do
     it 'upate pet successfully' do
-      obj_pets_form = "name:#{Faker::Creature::Dog.name} status:sold"
-      puts obj_pets_form
       new_pet = pet.create_pet(obj_pets)
       pet_id = new_pet['id']
 
-      resultado = pet.update_pet_form(obj_pets_form, pet_id)
-      puts resultado
+      new_name = Faker::Creature::Dog.name
+      new_status = 'sold'
+
+      resultado = pet.update_pet_form(pet_id, new_name, new_status)
 
       expect(resultado.code).to eq(200)
-      expect(resultado['category']['id']).to eq(obj_pets[:category][:id])
-      expect(resultado['category']['name']).to eq(obj_pets[:category][:name])
-      expect(resultado['name']).to eq(obj_pets_form[:name])
-      expect(resultado['photoUrls']).to eq(obj_pets[:photoUrls])
-      expect(resultado['tags'][0]['id']).to eq(obj_pets[:tags][0][:id])
-      expect(resultado['tags'][0]['name']).to eq(obj_pets[:tags][0][:name])
-      expect(resultado['status']).to eq(obj_pets_form[:status])
+
+      busca = pet.find_pet_id(pet_id)
+      expect(busca['name']).to eq(new_name)
+      expect(busca['status']).to eq(new_status)
     end
 
     xit 'upate pet unsuccessfully - Invalid input' do
